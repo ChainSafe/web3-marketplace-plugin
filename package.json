@@ -1,6 +1,6 @@
 {
 	"name": "web3-marketplace-plugin",
-	"version": "1.0.0",
+	"version": "0.1.0",
 	"description": "web3.js plugin for Chainsafe gaming marketplace",
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
