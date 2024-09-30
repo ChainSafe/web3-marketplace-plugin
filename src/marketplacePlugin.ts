@@ -51,7 +51,6 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 
 			return receipt;
 		} catch (error) {
-			console.error('Error listing item:', error);
 			throw error;
 		}
 	}
@@ -85,7 +84,6 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 
 			return receipt;
 		} catch (error) {
-			console.error('Error listing items:', error);
 			throw error;
 		}
 	}
@@ -108,7 +106,6 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 
 			return receipt;
 		} catch (error) {
-			console.error('Error canceling listing:', error);
 			throw error;
 		}
 	}
@@ -133,7 +130,6 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 
 			return receipt;
 		} catch (error) {
-			console.error('Error canceling expired listings:', error);
 			throw error;
 		}
 	}
@@ -161,7 +157,6 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 
 			return receipt;
 		} catch (error) {
-			console.error('Error purchasing item:', error);
 			throw error;
 		}
 	}

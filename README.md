@@ -1,6 +1,6 @@
 # web3-marketplace-plugin for Web3.js
 
-The Marketplace plugin is for the Chainsafe gaming marketplace. This pliugin will enable web developers to utilize Web3.js with the NFT Launchpad and NFT marketplace contracts on the [gaming dashboard](https://dashboard.gaming.chainsafe.io/dashboard) in their web applications.
+The Marketplace plugin is for the Chainsafe gaming marketplace. This plugin will enable web developers to utilize Web3.js with the NFT Launchpad and NFT marketplace contracts on the [gaming dashboard](https://dashboard.gaming.chainsafe.io/dashboard) in their web applications.
 
 ## Documentation
 
