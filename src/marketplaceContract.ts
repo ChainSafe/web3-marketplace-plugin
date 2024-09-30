@@ -1,3 +1,5 @@
+// Solidity contract
+// https://github.com/ChainSafe/marketplace-contracts/blob/137de426dde34b90941fff6403a414b8e796b92d/contracts/market/MarketplaceV2.sol#L132
 export const marketplaceABI = [
 	{
 		inputs: [],
