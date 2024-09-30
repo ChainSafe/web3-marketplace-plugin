@@ -1,5 +1,5 @@
-import { Web3PluginBase, Contract, Receipt } from 'web3';
-import { marketplaceABI } from './contracts/marketplaceContract';
+import { Web3PluginBase, Receipt } from 'web3';
+import { marketplaceContract } from './types';
 
 export class Web3MarketplacePlugin extends Web3PluginBase {
 	public pluginNamespace = 'marketplace';
@@ -28,7 +28,7 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 	/**
 	 * Places an item for sale on the marketplace using Web3.js.
 	 *
-	 * @param {Contract} contract - The initialized Web3 contract instance of the marketplace.
+	 * @param {marketplaceContract} contract - The initialized Web3 contract instance of the marketplace.
 	 * @param {string} nftContract - The address of the NFT contract.
 	 * @param {string} tokenId - The ID of the token in the NFT contract.
 	 * @param {string} price - The listing price in wei as a string.
@@ -36,7 +36,7 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 	 * @returns {Promise<Receipt>} - Returns the transaction receipt object.
 	 */
 	public async listItem(
-		contract: Contract<typeof marketplaceABI>,
+		contract: marketplaceContract,
 		nftContract: string,
 		tokenId: string,
 		price: string,
@@ -58,7 +58,7 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 	/**
 	 * Places multiple items for sale on the marketplace using Web3.js.
 	 *
-	 * @param {Contract<typeof marketplaceABI>} contract - The initialized Web3 contract instance of the marketplace.
+	 * @param {marketplaceContract} contract - The initialized Web3 contract instance of the marketplace.
 	 * @param {string[]} nftContracts - Array of NFT contract addresses.
 	 * @param {string[]} tokenIds - Array of token IDs in the NFT contracts.
 	 * @param {string[]} amounts - Array of token amounts as strings.
@@ -67,7 +67,7 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 	 * @returns {Promise<Receipt>} - Returns the transaction receipt object.
 	 */
 	public async listItems(
-		contract: Contract<typeof marketplaceABI>,
+		contract: marketplaceContract,
 		nftContracts: string[],
 		tokenIds: string[],
 		amounts: string[],
@@ -93,11 +93,11 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 	/**
 	 * Cancels the listing of the token and returns it to the seller using Web3.js.
 	 *
-	 * @param {Contract<typeof marketplaceABI>} contract - The initialized Web3 contract instance of the marketplace.
+	 * @param {marketplaceContract} contract - The initialized Web3 contract instance of the marketplace.
 	 * @param {string} itemId - The ID of the listed token on the marketplace.
 	 * @returns {Promise<Receipt>} - Returns the transaction receipt object.
 	 */
-	async cancelListing(contract: Contract<typeof marketplaceABI>, itemId: string): Promise<Receipt> {
+	async cancelListing(contract: marketplaceContract, itemId: string): Promise<Receipt> {
 		try {
 			const sender = await this.getSender();
 
@@ -115,12 +115,12 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 	/**
 	 * Cancels the listings of the expired items and returns them to the seller using Web3.js.
 	 *
-	 * @param {Contract<typeof marketPlaceABI>} contract - The initialized Web3 contract instance of the marketplace.
+	 * @param {marketplaceContract} contract - The initialized Web3 contract instance of the marketplace.
 	 * @param {string[]} itemIds - Array of IDs of the expired items on the marketplace.
 	 * @returns {Promise<Receipt>} - Returns the transaction receipt object.
 	 */
 	public async cancelExpiredListings(
-		contract: Contract<typeof marketplaceABI>,
+		contract: marketplaceContract,
 		itemIds: string[],
 	): Promise<Receipt> {
 		try {
@@ -141,16 +141,12 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 	/**
 	 * Performs the sale of a marketplace item using Web3.js.
 	 *
-	 * @param {Contract<typeof marketPlaceABI>} contract - The initialized Web3 contract instance of the marketplace.
+	 * @param {marketplaceContract} contract - The initialized Web3 contract instance of the marketplace.
 	 * @param {string} itemId - The ID of the listed token on the marketplace.
 	 * @param {string} price - The price of the item in wei, as required by the function (must match the listing price).
 	 * @returns {Promise<Receipt>} - Returns the transaction receipt object.
 	 */
-	public async purchaseItem(
-		contract: Contract<typeof marketplaceABI>,
-		itemId: string,
-		price: string,
-	) {
+	public async purchaseItem(contract: marketplaceContract, itemId: string, price: string) {
 		try {
 			const sender = await this.getSender();
 			// Send the transaction to call the `purchaseItem` function
