@@ -1,34 +1,16 @@
-web3-plugin-template
-===========
+# web3-marketplace-plugin for Web3.js
 
-This is a template for creating a repository for web3.js plugin.
+The Marketplace plugin is for the Chainsafe gaming marketplace. This plugin will enable web developers to utilize Web3.js with the NFT Launchpad and NFT marketplace contracts on the [gaming dashboard](https://dashboard.gaming.chainsafe.io/dashboard) in their web applications.
 
-How to use
-------------
+## Documentation
 
-1. Create your project out of this template.
-
-    You can do so by pressing on `Use this template` on the above right corner and then select `Create new Repositor`. Please, use the convention `web3-plugin-<name>` for your repo name.
-2. Update the `name` and `description` fileds at your `package.json`.
-
-    Chose a name like: `@<organization>/web3-plugin-<name>` (or the less better `web3-plugin-<name>`).
-3. Update the code inside `src` folder.
-
-4. Modify and add tests inside `test` folder.
-
-5. Publish to the npm registry.
-
-    You can publish with something like: `yarn build && npm publish --access public`.
-
-Contributing
-------------
+## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
 to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
-License
--------
+## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
