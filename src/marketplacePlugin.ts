@@ -1,5 +1,5 @@
 import { Web3PluginBase, Receipt } from 'web3';
-import { marketplaceContract } from './types';
+import { marketplaceContract, collectionToken, marketplaceItemsResult, tokenOwnersResult } from './types';
 
 export class Web3MarketplacePlugin extends Web3PluginBase {
 	public pluginNamespace = 'marketplace';
@@ -165,6 +165,107 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 			throw error;
 		}
 	}
+
+	/**
+	 * Gets all items in a marketplace.
+	 * Path: https://api.gaming.chainsafe.io/v1/projects/{projectID}/marketplaces/{marketplaceID}/items
+	 * 
+	 * @param {string} marketplaceId - Marketplace ID to query.
+	 * @param {string} customProjectId - Project ID to query (optional).
+	 * @returns {Promise<marketplaceItemsResult>} - Returns the marketplace items response object.
+	 */
+	public async getMarketplaceItems(marketplaceId: string, customProjectId?: string): Promise<marketplaceItemsResult> {
+		try {
+			// Define the API base URL
+			const baseUrl = 'https://api.gaming.chainsafe.io/v1';
+	
+			// Construct the full URL with path and optional project ID as a query parameter
+			const url = `${baseUrl}/projects/${customProjectId}/marketplaces/${marketplaceId}/items`;
+	
+			// Send the GET request to the API
+			const response = await fetch(url);
+	
+			// Check if the response is OK (status code 200-299)
+			if (!response.ok) {
+				throw new Error(`Failed to fetch marketplace items: ${response.statusText}`);
+			}
+	
+			// Parse the response as JSON
+			const data = await response.json();
+			return data;
+		} catch (error) {
+			console.error('Error getting marketplace items:', error);
+			throw error;
+		}
+
+	}
+
+	/**
+	 * Gets the information of a token in a collection via ID.
+	 * Path: https://api.gaming.chainsafe.io/v1/projects/{projectID}/collections/{collectionID}/tokens/{tokenID}
+	 * @param {string} customProjectId - Project ID to query.
+	 * @param {string} collectionId - Collection ID to query.
+	 * @param {string} tokenId - Token ID to query (optional).
+	 * @returns {Promise<collectionToken>} - Returns the token information response object.
+	 */
+	public async getCollectionToken(customProjectId: string, collectionId: string, tokenId: string): Promise<collectionToken> {
+		try {
+			// Define the API base URL
+			const baseUrl = 'https://api.gaming.chainsafe.io/v1';
+	
+			// Construct the full URL with path parameters; tokenId is optional
+			const url = `${baseUrl}/projects/${customProjectId}/collections/${collectionId}/tokens/${tokenId}`;
+	
+			// Send the GET request to the API
+			const response = await fetch(url);
+	
+			// Check if the response is OK (status code 200-299)
+			if (!response.ok) {
+				throw new Error(`Failed to fetch collection token: ${response.statusText}`);
+			}
+	
+			// Parse the response as JSON
+			const data = await response.json();
+			return data;
+		} catch (error) {
+			console.error('Error getting collection token:', error);
+			throw error;
+		}
+	};
+
+	/**
+	 * Gets the owners of a token ID in a collection.
+	 * Path: https://api.gaming.chainsafe.io/v1/projects/{projectID}/collections/{collectionID}/tokens/{tokenID}/owners
+	 * 
+	 * @param {string} customProjectId - Project ID to query.
+	 * @param {string} collectionId - Collection ID to query.
+	 * @param {string} tokenId - Token ID to query.
+	 * @returns {Promise<tokenOwnersResult>} - Returns the owners response object.
+	 */
+	public async getTokenOwners(customProjectId: string, collectionId: string, tokenId: string): Promise<tokenOwnersResult> {
+		try {
+			// Define the API base URL
+			const baseUrl = 'https://api.gaming.chainsafe.io/v1';
+	
+			// Construct the full URL with path parameters
+			const url = `${baseUrl}/projects/${customProjectId}/collections/${collectionId}/tokens/${tokenId}/owners`;
+	
+			// Send the GET request to the API
+			const response = await fetch(url);
+	
+			// Check if the response is OK (status code 200-299)
+			if (!response.ok) {
+				throw new Error(`Failed to fetch token owners: ${response.statusText}`);
+			}
+	
+			// Parse the response as JSON
+			const data = await response.json();
+			return data;
+		} catch (error) {
+			console.error('Error getting token owners:', error);
+			throw error;
+		}
+	};
 }
 
 // Module Augmentation
