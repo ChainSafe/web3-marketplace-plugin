@@ -8,8 +8,8 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 		super();
 	}
 
-	private getSender = async () => {
-		const accounts = await this._requestManager.send({ method: 'eth_accounts' });
+	private getSender = async (): Promise<string> => {
+		const accounts: string[] = await this._requestManager.send({ method: 'eth_accounts' });
 		let sender;
 		// check if there are any accounts within wallet provider, if not use the default account.
 		if (accounts.length === 0) {
@@ -146,7 +146,11 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 	 * @param {string} price - The price of the item in wei, as required by the function (must match the listing price).
 	 * @returns {Promise<Receipt>} - Returns the transaction receipt object.
 	 */
-	public async purchaseItem(contract: marketplaceContract, itemId: string, price: string) {
+	public async purchaseItem(
+		contract: marketplaceContract,
+		itemId: string,
+		price: string,
+	): Promise<Receipt> {
 		try {
 			const sender = await this.getSender();
 			// Send the transaction to call the `purchaseItem` function
