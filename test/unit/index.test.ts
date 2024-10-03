@@ -1,5 +1,5 @@
 import { Web3, core } from 'web3';
-import { Web3MarketplacePlugin } from '../src';
+import { Web3MarketplacePlugin } from '../../src';
 
 describe('Web3MarketplacePlugin Tests', () => {
 	it('should register Web3MarketplacePlugin plugin on Web3Context instance', () => {
