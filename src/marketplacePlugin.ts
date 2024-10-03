@@ -42,18 +42,13 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 		price: string,
 		deadline: string,
 	): Promise<Receipt> {
-		try {
-			const sender = await this.getSender();
+		const sender = await this.getSender();
 
-			const receipt = await contract.methods.listItem(nftContract, tokenId, price, deadline).send({
-				from: sender,
-			});
+		const receipt = await contract.methods.listItem(nftContract, tokenId, price, deadline).send({
+			from: sender,
+		});
 
-			return receipt;
-		} catch (error) {
-			console.error('Error listing item:', error);
-			throw error;
-		}
+		return receipt;
 	}
 	/**
 	 * Places multiple items for sale on the marketplace using Web3.js.
@@ -74,20 +69,15 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 		prices: string[],
 		deadlines: string[],
 	): Promise<Receipt> {
-		try {
-			const sender = await this.getSender();
+		const sender = await this.getSender();
 
-			const receipt = await contract.methods
-				.listItems(nftContracts, tokenIds, amounts, prices, deadlines)
-				.send({
-					from: sender,
-				});
+		const receipt = await contract.methods
+			.listItems(nftContracts, tokenIds, amounts, prices, deadlines)
+			.send({
+				from: sender,
+			});
 
-			return receipt;
-		} catch (error) {
-			console.error('Error listing items:', error);
-			throw error;
-		}
+		return receipt;
 	}
 
 	/**
@@ -98,19 +88,14 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 	 * @returns {Promise<Receipt>} - Returns the transaction receipt object.
 	 */
 	async cancelListing(contract: marketplaceContract, itemId: string): Promise<Receipt> {
-		try {
-			const sender = await this.getSender();
+		const sender = await this.getSender();
 
-			// Send the transaction to call the `cancelListing` function
-			const receipt = await contract.methods.cancelListing(itemId).send({
-				from: sender,
-			});
+		// Send the transaction to call the `cancelListing` function
+		const receipt = await contract.methods.cancelListing(itemId).send({
+			from: sender,
+		});
 
-			return receipt;
-		} catch (error) {
-			console.error('Error canceling listing:', error);
-			throw error;
-		}
+		return receipt;
 	}
 	/**
 	 * Cancels the listings of the expired items and returns them to the seller using Web3.js.
@@ -123,19 +108,14 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 		contract: marketplaceContract,
 		itemIds: string[],
 	): Promise<Receipt> {
-		try {
-			const sender = await this.getSender();
+		const sender = await this.getSender();
 
-			// Send the transaction to call the `cancelExpiredListings` function
-			const receipt = await contract.methods.cancelExpiredListings(itemIds).send({
-				from: sender,
-			});
+		// Send the transaction to call the `cancelExpiredListings` function
+		const receipt = await contract.methods.cancelExpiredListings(itemIds).send({
+			from: sender,
+		});
 
-			return receipt;
-		} catch (error) {
-			console.error('Error canceling expired listings:', error);
-			throw error;
-		}
+		return receipt;
 	}
 
 	/**
@@ -151,19 +131,14 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 		itemId: string,
 		price: string,
 	): Promise<Receipt> {
-		try {
-			const sender = await this.getSender();
-			// Send the transaction to call the `purchaseItem` function
-			const receipt = await contract.methods.purchaseItem(itemId).send({
-				from: sender,
-				value: price,
-			});
+		const sender = await this.getSender();
+		// Send the transaction to call the `purchaseItem` function
+		const receipt = await contract.methods.purchaseItem(itemId).send({
+			from: sender,
+			value: price,
+		});
 
-			return receipt;
-		} catch (error) {
-			console.error('Error purchasing item:', error);
-			throw error;
-		}
+		return receipt;
 	}
 
 	/**
