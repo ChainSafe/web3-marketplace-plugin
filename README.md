@@ -4,6 +4,8 @@ The Marketplace plugin is for the Chainsafe gaming marketplace. This plugin will
 
 ## Documentation
 
+Refer to the comprehensive [API documentation](https://chainsafe.github.io/web3-marketplace-plugin/index.html) for a complete overview of this plugin's capabilities.
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
