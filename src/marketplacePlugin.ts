@@ -13,13 +13,13 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 		let sender;
 		// check if there are any accounts within wallet provider, if not use the default account.
 		if (accounts.length === 0) {
-			sender = this.config.defaultAccount;
+			sender = this.config.defaultAccount || this.defaultAccount;
 		} else {
 			sender = accounts[0];
 		}
 		if (!sender) {
 			throw new Error(
-				"No account found, please connect to a wallet provider or set a default account - 'web3.config.defaultAccount = <your address>'",
+				"No account found, please connect to a wallet provider or set a default account - 'web3.defaultAccount = <your address>'",
 			);
 		}
 		return sender;
