@@ -13,7 +13,7 @@ dotenv.config();
 
 describe('Web3MarketplacePlugin method Tests', () => {
 	const provider = process.env.provider;
-	const pk = process.env.privatekey;
+	const pk = process.env.PRIVATEKEY;
 	let contract: MarketplaceContract;
 	let web3: Web3;
 	beforeAll(() => {
