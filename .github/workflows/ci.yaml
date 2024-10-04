@@ -26,6 +26,8 @@ jobs:
               run: yarn run lint
             - name: Tests
               run: yarn run test
+              env:
+                privatekey: ${{ secrets.privatekey }}
 
     maybe-release:
         name: release

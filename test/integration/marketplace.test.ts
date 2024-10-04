@@ -24,21 +24,21 @@ describe('Web3MarketplacePlugin method Tests', () => {
 		contract = new web3.eth.Contract(marketplaceABI, marketplaceAddress);
 	});
 
-	it.skip('should list an item on the marketplace', async () => {
+	it('should list an item on the marketplace', async () => {
 		const deadline = (Math.floor(Date.now() / 1000) + 7 * 24 * 60 * 60).toString();
 
 		const receipt = await web3.marketplace.listItem(
 			contract,
 			collectionAddress,
-			'1',
-			'1',
+			'2',
+			'1000',
 			deadline,
 		);
 		expect(receipt).toBeDefined();
 	});
 
-	it.skip('should cancel an item on the marketplace', async () => {
-		const receipt = await web3.marketplace.cancelListing(contract, '1');
+	it('should cancel an item on the marketplace', async () => {
+		const receipt = await web3.marketplace.cancelListing(contract, '0');
 		expect(receipt).toBeDefined();
 	});
 
