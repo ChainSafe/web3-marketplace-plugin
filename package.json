@@ -13,7 +13,10 @@
 		"build": "tsc --project tsconfig.build.json",
 		"test": "jest --config=./test/jest.config.js",
 		"prettier": "prettier --write '{src,test}/**/*.ts'",
-		"build:docs": "npx typedoc ./src/index.ts"
+		"build:docs": "npx typedoc ./src/index.ts",
+		"test:unit": "jest --config=./test/unit/jest.config.js",
+		"test:integration": "jest --config=./test/integration/jest.config.js",
+		"test:manual": "jest --config=./test/manual/jest.config.js"
 	},
 	"contributors": [
 		"ChainSafe <info@chainsafe.io>"
