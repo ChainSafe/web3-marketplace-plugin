@@ -154,14 +154,14 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 	 * Path: https://api.gaming.chainsafe.io/v1/projects/{projectID}/marketplaces/{marketplaceID}/items
 	 *
 	 * @param {string} marketplaceId - Marketplace ID to query.
-	 * @param {string} customProjectId - Project ID to query (optional).
+	 * @param {string} customProjectId - Project ID to query.
 	 * @returns {Promise<marketplaceItemsResult>} - Returns the marketplace items response object.
 	 */
 	public async getMarketplaceItems(
 		marketplaceId: string,
 		customProjectId: string,
 	): Promise<marketplaceItemsResult> {
-		// Construct the full URL with path and optional project ID as a query parameter
+		// Construct the full URL with path project ID as a query parameter
 		const url = `${this.baseUrl}/projects/${customProjectId}/marketplaces/${marketplaceId}/items`;
 
 		// Send the GET request to the API
@@ -190,7 +190,7 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 		collectionId: string,
 		tokenId: string,
 	): Promise<collectionToken> {
-		// Construct the full URL with path parameters; tokenId is optional
+		// Construct the full URL with path parameters
 		const url = `${this.baseUrl}/projects/${customProjectId}/collections/${collectionId}/tokens/${tokenId}`;
 
 		// Send the GET request to the API
