@@ -5,12 +5,18 @@ import {
 	marketplaceItemsResult,
 	tokenOwnersResult,
 } from './types';
+import {
+	MarketplaceApiErrors,
+	UnknownAccountError,
+} from './errors';
 
 export class Web3MarketplacePlugin extends Web3PluginBase {
 	public pluginNamespace = 'marketplace';
+	private baseUrl: string;
 
-	constructor() {
+	constructor(baseUrl: string = 'https://api.gaming.chainsafe.io/v1') {
 		super();
+		this.baseUrl = baseUrl;
 	}
 
 	private getSender = async (): Promise<string> => {
@@ -23,7 +29,7 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 			sender = accounts[0];
 		}
 		if (!sender) {
-			throw new Error(
+			throw new UnknownAccountError(
 				"No account found, please connect to a wallet provider or set a default account - 'web3.defaultAccount = <your address>'",
 			);
 		}
@@ -158,18 +164,16 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 		marketplaceId: string,
 		customProjectId: string,
 	): Promise<marketplaceItemsResult> {
-		// Define the API base URL
-		const baseUrl = 'https://api.gaming.chainsafe.io/v1';
 
 		// Construct the full URL with path and optional project ID as a query parameter
-		const url = `${baseUrl}/projects/${customProjectId}/marketplaces/${marketplaceId}/items`;
+		const url = `${this.baseUrl}/projects/${customProjectId}/marketplaces/${marketplaceId}/items`;
 
 		// Send the GET request to the API
 		const response = await fetch(url);
 
 		// Check if the response is OK (status code 200-299)
 		if (!response.ok) {
-			throw new Error(`Failed to fetch marketplace items: ${response.statusText}`);
+			throw new MarketplaceApiErrors("Failed to fetch marketplace items", response.statusText);
 		}
 
 		// Parse the response as JSON
@@ -182,7 +186,7 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 	 * Path: https://api.gaming.chainsafe.io/v1/projects/{projectID}/collections/{collectionID}/tokens/{tokenID}
 	 * @param {string} customProjectId - Project ID to query.
 	 * @param {string} collectionId - Collection ID to query.
-	 * @param {string} tokenId - Token ID to query (optional).
+	 * @param {string} tokenId - Token ID to query
 	 * @returns {Promise<collectionToken>} - Returns the token information response object.
 	 */
 	public async getCollectionToken(
@@ -190,18 +194,16 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 		collectionId: string,
 		tokenId: string,
 	): Promise<collectionToken> {
-		// Define the API base URL
-		const baseUrl = 'https://api.gaming.chainsafe.io/v1';
 
 		// Construct the full URL with path parameters; tokenId is optional
-		const url = `${baseUrl}/projects/${customProjectId}/collections/${collectionId}/tokens/${tokenId}`;
+		const url = `${this.baseUrl}/projects/${customProjectId}/collections/${collectionId}/tokens/${tokenId}`;
 
 		// Send the GET request to the API
 		const response = await fetch(url);
 
 		// Check if the response is OK (status code 200-299)
 		if (!response.ok) {
-			throw new Error(`Failed to fetch collection token: ${response.statusText}`);
+			throw new MarketplaceApiErrors("Failed to fetch collection token", response.statusText);
 		}
 
 		// Parse the response as JSON
@@ -223,18 +225,16 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 		collectionId: string,
 		tokenId: string,
 	): Promise<tokenOwnersResult> {
-		// Define the API base URL
-		const baseUrl = 'https://api.gaming.chainsafe.io/v1';
 
 		// Construct the full URL with path parameters
-		const url = `${baseUrl}/projects/${customProjectId}/collections/${collectionId}/tokens/${tokenId}/owners`;
+		const url = `${this.baseUrl}/projects/${customProjectId}/collections/${collectionId}/tokens/${tokenId}/owners`;
 
 		// Send the GET request to the API
 		const response = await fetch(url);
 
 		// Check if the response is OK (status code 200-299)
 		if (!response.ok) {
-			throw new Error(`Failed to fetch token owners: ${response.statusText}`);
+			throw new MarketplaceApiErrors("Failed to fetch token owners", response.statusText);
 		}
 
 		// Parse the response as JSON
