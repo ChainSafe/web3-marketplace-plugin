@@ -28,7 +28,7 @@ jobs:
               run: yarn run test:unit
               env:
                 PRIVATEKEY: ${{ secrets.PRIVATEKEY }}
-            - name: unit tests
+            - name: integration tests
               run: yarn run test:integration
               env:
                 PRIVATEKEY: ${{ secrets.PRIVATEKEY }}
