@@ -1,10 +1,7 @@
 import Web3 from 'web3';
 import * as dotenv from 'dotenv';
 import { Web3MarketplacePlugin, marketplaceABI, MarketplaceContract } from '../../src';
-import {
-	marketplaceAddress,
-	collectionAddress,
-} from '../fixtures';
+import { marketplaceAddress, collectionAddress } from '../fixtures';
 
 dotenv.config();
 

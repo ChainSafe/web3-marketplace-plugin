@@ -5,10 +5,7 @@ import {
 	marketplaceItemsResult,
 	tokenOwnersResult,
 } from './types';
-import {
-	MarketplaceApiErrors,
-	UnknownAccountError,
-} from './errors';
+import { MarketplaceApiErrors, UnknownAccountError } from './errors';
 
 export class Web3MarketplacePlugin extends Web3PluginBase {
 	public pluginNamespace = 'marketplace';
@@ -164,7 +161,6 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 		marketplaceId: string,
 		customProjectId: string,
 	): Promise<marketplaceItemsResult> {
-
 		// Construct the full URL with path and optional project ID as a query parameter
 		const url = `${this.baseUrl}/projects/${customProjectId}/marketplaces/${marketplaceId}/items`;
 
@@ -173,7 +169,7 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 
 		// Check if the response is OK (status code 200-299)
 		if (!response.ok) {
-			throw new MarketplaceApiErrors("Failed to fetch marketplace items", response.statusText);
+			throw new MarketplaceApiErrors('Failed to fetch marketplace items', response.statusText);
 		}
 
 		// Parse the response as JSON
@@ -194,7 +190,6 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 		collectionId: string,
 		tokenId: string,
 	): Promise<collectionToken> {
-
 		// Construct the full URL with path parameters; tokenId is optional
 		const url = `${this.baseUrl}/projects/${customProjectId}/collections/${collectionId}/tokens/${tokenId}`;
 
@@ -203,7 +198,7 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 
 		// Check if the response is OK (status code 200-299)
 		if (!response.ok) {
-			throw new MarketplaceApiErrors("Failed to fetch collection token", response.statusText);
+			throw new MarketplaceApiErrors('Failed to fetch collection token', response.statusText);
 		}
 
 		// Parse the response as JSON
@@ -225,7 +220,6 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 		collectionId: string,
 		tokenId: string,
 	): Promise<tokenOwnersResult> {
-
 		// Construct the full URL with path parameters
 		const url = `${this.baseUrl}/projects/${customProjectId}/collections/${collectionId}/tokens/${tokenId}/owners`;
 
@@ -234,7 +228,7 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 
 		// Check if the response is OK (status code 200-299)
 		if (!response.ok) {
-			throw new MarketplaceApiErrors("Failed to fetch token owners", response.statusText);
+			throw new MarketplaceApiErrors('Failed to fetch token owners', response.statusText);
 		}
 
 		// Parse the response as JSON

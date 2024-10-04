@@ -1,11 +1,7 @@
 import Web3 from 'web3';
 import * as dotenv from 'dotenv';
 import { Web3MarketplacePlugin } from '../../src';
-import {
-	marketplaceId,
-	customProjectId,
-	collectionId,
-} from '../fixtures';
+import { marketplaceId, customProjectId, collectionId } from '../fixtures';
 
 dotenv.config();
 
