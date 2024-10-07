@@ -1,9 +1,9 @@
 import { Web3PluginBase, Receipt } from 'web3';
 import {
 	MarketplaceContract,
-	collectionToken,
-	marketplaceItemsResult,
-	tokenOwnersResult,
+	CollectionToken,
+	MarketplaceItemsResult,
+	TokenOwnersResult,
 } from './types';
 import { MarketplaceApiErrors, UnknownAccountError } from './errors';
 
@@ -31,6 +31,18 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 			);
 		}
 		return sender;
+	};
+
+	private fetchData = async <ReturnType>(url: string, errorMessage: string): Promise<ReturnType> => {
+		const response = await fetch(url)
+
+		if (!response.ok) {
+			throw new MarketplaceApiErrors(errorMessage, response.statusText);
+		}
+
+		// Parse the response as JSON
+		const data = (await response.json());
+		return data;
 	};
 
 	/**
@@ -155,26 +167,17 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 	 *
 	 * @param {string} marketplaceId - Marketplace ID to query.
 	 * @param {string} customProjectId - Project ID to query.
-	 * @returns {Promise<marketplaceItemsResult>} - Returns the marketplace items response object.
+	 * @returns {Promise<MarketplaceItemsResult>} - Returns the marketplace items response object.
 	 */
 	public async getMarketplaceItems(
 		marketplaceId: string,
 		customProjectId: string,
-	): Promise<marketplaceItemsResult> {
+	): Promise<MarketplaceItemsResult> {
 		// Construct the full URL with path project ID as a query parameter
 		const url = `${this.baseUrl}/projects/${customProjectId}/marketplaces/${marketplaceId}/items`;
 
-		// Send the GET request to the API
-		const response = await fetch(url);
-
-		// Check if the response is OK (status code 200-299)
-		if (!response.ok) {
-			throw new MarketplaceApiErrors('Failed to fetch marketplace items', response.statusText);
-		}
-
-		// Parse the response as JSON
-		const data = (await response.json()) as marketplaceItemsResult;
-		return data;
+		const res = await this.fetchData<MarketplaceItemsResult>(url, 'Failed to fetch marketplace items');
+		return res;
 	}
 
 	/**
@@ -183,26 +186,17 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 	 * @param {string} customProjectId - Project ID to query.
 	 * @param {string} collectionId - Collection ID to query.
 	 * @param {string} tokenId - Token ID to query
-	 * @returns {Promise<collectionToken>} - Returns the token information response object.
+	 * @returns {Promise<CollectionToken>} - Returns the token information response object.
 	 */
 	public async getCollectionToken(
 		customProjectId: string,
 		collectionId: string,
 		tokenId: string,
-	): Promise<collectionToken> {
+	): Promise<CollectionToken> {
 		// Construct the full URL with path parameters
 		const url = `${this.baseUrl}/projects/${customProjectId}/collections/${collectionId}/tokens/${tokenId}`;
 
-		// Send the GET request to the API
-		const response = await fetch(url);
-
-		// Check if the response is OK (status code 200-299)
-		if (!response.ok) {
-			throw new MarketplaceApiErrors('Failed to fetch collection token', response.statusText);
-		}
-
-		// Parse the response as JSON
-		const data = (await response.json()) as collectionToken;
+		const data = await this.fetchData<CollectionToken>(url, 'Failed to fetch collection token');
 		return data;
 	}
 
@@ -213,26 +207,18 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 	 * @param {string} customProjectId - Project ID to query.
 	 * @param {string} collectionId - Collection ID to query.
 	 * @param {string} tokenId - Token ID to query.
-	 * @returns {Promise<tokenOwnersResult>} - Returns the owners response object.
+	 * @returns {Promise<TokenOwnersResult>} - Returns the owners response object.
 	 */
 	public async getTokenOwners(
 		customProjectId: string,
 		collectionId: string,
 		tokenId: string,
-	): Promise<tokenOwnersResult> {
+	): Promise<TokenOwnersResult> {
 		// Construct the full URL with path parameters
 		const url = `${this.baseUrl}/projects/${customProjectId}/collections/${collectionId}/tokens/${tokenId}/owners`;
 
 		// Send the GET request to the API
-		const response = await fetch(url);
-
-		// Check if the response is OK (status code 200-299)
-		if (!response.ok) {
-			throw new MarketplaceApiErrors('Failed to fetch token owners', response.statusText);
-		}
-
-		// Parse the response as JSON
-		const data = (await response.json()) as tokenOwnersResult;
+		const data = await this.fetchData<TokenOwnersResult>(url, 'Failed to fetch token owners');
 		return data;
 	}
 }

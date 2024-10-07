@@ -3,7 +3,7 @@ import { marketplaceABI } from './contracts/marketplaceContract';
 
 export type MarketplaceContract = Contract<typeof marketplaceABI>;
 
-export type collectionToken = {
+export type CollectionToken = {
 	token_id: string;
 	token_type: string;
 	contract_address: string;
@@ -19,7 +19,7 @@ export type collectionToken = {
 	supply: string;
 };
 
-export type marketplaceItem = {
+export type MarketplaceItem = {
 	id: string;
 	chain_id: number;
 	project_id: string;
@@ -44,12 +44,12 @@ export type marketplaceItem = {
 	listed_at: number;
 };
 
-export type marketplaceItemsResult = {
+export type MarketplaceItemsResult = {
 	page_number: number;
 	page_size: number;
 	total: number;
 	cursor: string;
-	items: marketplaceItem[];
+	items: MarketplaceItem[];
 };
 
 export type Owner = {
@@ -57,7 +57,7 @@ export type Owner = {
 	supply: string;
 };
 
-export type tokenOwnersResult = {
+export type TokenOwnersResult = {
 	page_number: number;
 	page_size: number;
 	total: number;
