@@ -21,8 +21,10 @@ describe('Web3MarketplacePlugin method Tests', () => {
 		expect(result.items.length).toBeGreaterThan(0);
 	});
 
-	it ('should fail to get items from marketplace', async () => {
-		await expect(web3.marketplace.getMarketplaceItems('invalidID', customProjectId)).rejects.toThrow('Failed to fetch marketplace items');
+	it('should fail to get items from marketplace', async () => {
+		await expect(
+			web3.marketplace.getMarketplaceItems('invalidID', customProjectId),
+		).rejects.toThrow('Failed to fetch marketplace items');
 	});
 
 	it('should get collection token', async () => {
@@ -30,8 +32,10 @@ describe('Web3MarketplacePlugin method Tests', () => {
 		expect(result.token_id).toEqual('0');
 	});
 
-	it ('should fail to get collection token', async () => {
-		await expect(web3.marketplace.getCollectionToken(customProjectId, 'invalidCollectionID', '0')).rejects.toThrow('Failed to fetch collection token');
+	it('should fail to get collection token', async () => {
+		await expect(
+			web3.marketplace.getCollectionToken(customProjectId, 'invalidCollectionID', '0'),
+		).rejects.toThrow('Failed to fetch collection token');
 	});
 
 	it('should get token owners', async () => {
@@ -39,7 +43,9 @@ describe('Web3MarketplacePlugin method Tests', () => {
 		expect(result.owners).toBeDefined();
 	});
 
-	it ('should fail to get token owners', async () => {
-		await expect(web3.marketplace.getTokenOwners(customProjectId, 'invalidCollectionID', '0')).rejects.toThrow('Failed to fetch token owners');
+	it('should fail to get token owners', async () => {
+		await expect(
+			web3.marketplace.getTokenOwners(customProjectId, 'invalidCollectionID', '0'),
+		).rejects.toThrow('Failed to fetch token owners');
 	});
 });

@@ -33,15 +33,18 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 		return sender;
 	};
 
-	private fetchData = async <ReturnType>(url: string, errorMessage: string): Promise<ReturnType> => {
-		const response = await fetch(url)
+	private fetchData = async <ReturnType>(
+		url: string,
+		errorMessage: string,
+	): Promise<ReturnType> => {
+		const response = await fetch(url);
 
 		if (!response.ok) {
 			throw new MarketplaceApiErrors(errorMessage, response.statusText);
 		}
 
 		// Parse the response as JSON
-		const data = (await response.json());
+		const data = (await response.json()) as ReturnType;
 		return data;
 	};
 
@@ -176,7 +179,10 @@ export class Web3MarketplacePlugin extends Web3PluginBase {
 		// Construct the full URL with path project ID as a query parameter
 		const url = `${this.baseUrl}/projects/${customProjectId}/marketplaces/${marketplaceId}/items`;
 
-		const res = await this.fetchData<MarketplaceItemsResult>(url, 'Failed to fetch marketplace items');
+		const res = await this.fetchData<MarketplaceItemsResult>(
+			url,
+			'Failed to fetch marketplace items',
+		);
 		return res;
 	}
 
