@@ -1,5 +1,7 @@
 # web3-marketplace-plugin for Web3.js
 
+#### Web3.js libraries are being sunset on March 4th, 2025. For migration guides and more details please refer to [Chainsafe blog](https://blog.chainsafe.io/web3-js-sunset/)
+
 The Marketplace plugin is for the Chainsafe gaming marketplace. This plugin will enable web developers to utilize Web3.js with the NFT Launchpad and NFT marketplace contracts on the [gaming dashboard](https://dashboard.gaming.chainsafe.io/dashboard) in their web applications.
 
 ## Documentation
